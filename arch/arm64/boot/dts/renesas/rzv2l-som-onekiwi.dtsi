@@ -16,9 +16,9 @@
 
 	aliases {
 		serial0 = &scif0;
-		serial1 = &scif1;
-		serial2 = &scif2;
-		serial3 = &scif3;
+		//serial1 = &scif1;
+		//serial2 = &scif2;
+		//serial3 = &scif3;
 
 		mmc0 = &sdhi0;
 		mmc1 = &sdhi1;
@@ -183,13 +183,21 @@
 		compatible = "gpio-leds";
 
 		led0 {
-			gpios = <&pinctrl RZG2L_GPIO(43, 1) GPIO_ACTIVE_LOW>;
+			gpios = <&pinctrl RZG2L_GPIO(21, 1) GPIO_ACTIVE_LOW>;
+			label = "LED0";
+			default-state = "on";
+			linux,default-trigger = "heartbeat";
+		};
+
+		led1 {
+			gpios = <&pinctrl RZG2L_GPIO(22, 0) GPIO_ACTIVE_LOW>;
 			label = "LED0";
 			default-state = "on";
 			linux,default-trigger = "heartbeat";
 		};
 	};
 
+	/*
 	keyboard {
 		compatible = "gpio-keys";
 		status = "okay";
@@ -199,7 +207,7 @@
 			linux,code = <KEY_1>;
 			label = "user_key";
 		};
-	};
+	};*/
 
     sound_rzg2l: sound {
 		compatible = "simple-audio-card";
@@ -208,26 +216,25 @@
 		simple-audio-card,frame-master = <&cpu_dai>;
 		simple-audio-card,mclk-fs = <256>;
 		simple-audio-card,widgets =
-				"Microphone", "Microphone Jack",
-				"Headphone", "Headphone Jack",
-				"Speaker", "Speaker Ext",
-				"Line", "Line In Jack";
+			"Microphone", "Microphone Jack",
+			"Headphone", "Headphone Jack",
+			"Speaker", "Speaker Ext",
+			"Line", "Line In Jack";
 		simple-audio-card,routing =
-				"MIC_IN", "Microphone Jack",
-				"Microphone Jack", "Mic Bias",
-				"LINE_IN", "Line In Jack",
-				"Headphone Jack", "HP_OUT",
-				"Speaker Ext", "LINE_OUT";
+			"MIC_IN", "Microphone Jack",
+			"Microphone Jack", "Mic Bias",
+			"LINE_IN", "Line In Jack",
+			"Headphone Jack", "HP_OUT",
+			"Speaker Ext", "LINE_OUT";
 
 		cpu_dai: simple-audio-card,cpu {
-				sound-dai = <&ssi0>;
+			sound-dai = <&ssi0>;
 		};
 		codec_dai: simple-audio-card,codec {
-				sound-dai = <&sgtl5000>;
-				clocks = <&versa3 3>;
+			sound-dai = <&sgtl5000>;
+			clocks = <&versa3 3>;
 		};
     };
-
 };
 
 &adc {
@@ -455,52 +462,50 @@
 	};
 
 	sound_clk_pins: sound_clk {
-			pins = "AUDIO_CLK1", "AUDIO_CLK2";
-			input-enable;
+		pins = "AUDIO_CLK1", "AUDIO_CLK2";
+		input-enable;
 	};
 
 	ssi0_pins: ssi0 {
-			pinmux = <RZG2L_PORT_PINMUX(45, 0, 1)>, /* BCK */
-						<RZG2L_PORT_PINMUX(45, 1, 1)>, /* RCK */
-						<RZG2L_PORT_PINMUX(45, 2, 1)>, /* TXD */
-						<RZG2L_PORT_PINMUX(45, 3, 1)>; /* RXD */
+		pinmux = <RZG2L_PORT_PINMUX(45, 0, 1)>, /* BCK */
+				 <RZG2L_PORT_PINMUX(45, 1, 1)>, /* RCK */
+				 <RZG2L_PORT_PINMUX(45, 2, 1)>, /* TXD */
+				 <RZG2L_PORT_PINMUX(45, 3, 1)>; /* RXD */
 	};
 
 	usb0_pins: usb0 {
-			pinmux = <RZG2L_PORT_PINMUX(5, 0, 1)>,   /* OVC */
-                      <RZG2L_PORT_PINMUX(5, 1, 1)>; /* OTG_ID */
-
-
+		pinmux = <RZG2L_PORT_PINMUX(5, 0, 1)>,   /* OVC */
+				 <RZG2L_PORT_PINMUX(5, 1, 1)>; /* OTG_ID */
 	};
 
 	usb1_pins: usb1 {
-			pinmux = <RZG2L_PORT_PINMUX(42, 0, 1)>, /* VBUS */
-						<RZG2L_PORT_PINMUX(42, 1, 1)>; /* OVC */
+		pinmux = <RZG2L_PORT_PINMUX(42, 0, 1)>, /* VBUS */
+				 <RZG2L_PORT_PINMUX(42, 1, 1)>; /* OVC */
 	};
 
 	scif0_pins: scif0 {
-			pinmux = <RZG2L_PORT_PINMUX(38, 0, 1)>, /* TxD */
-						<RZG2L_PORT_PINMUX(38, 1, 1)>; /* RxD */
+		pinmux = <RZG2L_PORT_PINMUX(38, 0, 1)>, /* TxD */
+				 <RZG2L_PORT_PINMUX(38, 1, 1)>; /* RxD */
 	};
 
 	scif1_pins: scif1 {
-			pinmux = <RZG2L_PORT_PINMUX(40, 0, 1)>, /* TxD */
-						<RZG2L_PORT_PINMUX(40, 1, 1)>; /* RxD */
+		pinmux = <RZG2L_PORT_PINMUX(40, 0, 1)>, /* TxD */
+				 <RZG2L_PORT_PINMUX(40, 1, 1)>; /* RxD */
 	};
 
 	scif2_pins: scif2 {
-			pinmux = <RZG2L_PORT_PINMUX(48, 0, 1)>, /* TxD */
-						<RZG2L_PORT_PINMUX(48, 1, 1)>;/* RxD */
+		pinmux = <RZG2L_PORT_PINMUX(48, 0, 1)>, /* TxD */
+				 <RZG2L_PORT_PINMUX(48, 1, 1)>;/* RxD */
 	};
 
 	scif3_pins: scif3 {
-			pinmux = <RZG2L_PORT_PINMUX(0, 0, 5)>, /* TxD */
-						<RZG2L_PORT_PINMUX(0, 1, 5)>;/* RxD */
+		pinmux = <RZG2L_PORT_PINMUX(0, 0, 5)>, /* TxD */
+				 <RZG2L_PORT_PINMUX(0, 1, 5)>;/* RxD */
 	};
 
-        gpt4_pins: gpt4 {
-                pinmux = <RZG2L_PORT_PINMUX(43, 0, 2)>; /* Channel A */
-        };
+	gpt4_pins: gpt4 {
+		pinmux = <RZG2L_PORT_PINMUX(43, 0, 2)>; /* Channel A */
+	};
 };
 
 &sbc {
@@ -606,16 +611,16 @@
 	status = "okay";
 };
 
-&usb2_phy1 {
-	pinctrl-0 = <&usb1_pins>;
-	pinctrl-names = "default";
-	status = "okay";
-};
-
 &usb2_phy0 {
 	pinctrl-0 = <&usb0_pins>;
 	pinctrl-names = "default";
 	vbus-supply = <&usb0_vbus_otg>;
+	status = "okay";
+};
+
+&usb2_phy1 {
+	pinctrl-0 = <&usb1_pins>;
+	pinctrl-names = "default";
 	status = "okay";
 };
 
@@ -628,11 +633,12 @@
 	dr_mode = "otg";
 	status = "okay";
 
+	/*
 	port {
 		usbotg_hs_ep: endpoint {
 			remote-endpoint = <&con_usbotg_hs_ep>;
 		};
-	};
+	};*/
 };
 
 &ehci1 {
@@ -648,6 +654,7 @@
 
 &csi2 {
 	status = "okay";
+	/*
 	ports {
 		port {
 			csi2_in: endpoint {
@@ -656,16 +663,16 @@
 				remote-endpoint = <&ov5640_csi2_ep>;
 			};
 		};
-	};
+	};*/
 };
 
 &i2c0 {
 	pinctrl-0 = <&i2c0_pins>;
 	pinctrl-names = "default";
-
 	clock-frequency = <100000>;
 	status = "okay";
 
+	/*
 	ptn5150: ptn5150@3d {
 		compatible = "nxp,ptn5150";
 		reg = <0x3d>;
@@ -706,7 +713,7 @@
 			};
 		};
 
-	};
+	};*/
 
 };
 
@@ -716,10 +723,11 @@
 	clock-frequency = <100000>;
 	status = "okay";
 
+	/*
     rx8025t: rx8025t@32 {
 		compatible = "epson,rx8025t";
 		reg = <0x32>;
-    };
+    };*/
 
 	sgtl5000: audio-codec@a {
 		#sound-dai-cells = <0>;
@@ -739,12 +747,14 @@
 	clock-frequency = <400000>;
 	status = "okay";
 
+	/*
 	E2PROM:24C256C@50 {
 		compatible = "atmel,24c256";
 		reg = <0x50>;
 		pagesize = <64>;
-	};
+	};*/
 
+	/* Clock Generator */
 	versa3: versa3@68 {
 		compatible = "renesas,5p35023";
 		reg = <0x68>;
@@ -787,53 +797,55 @@
 	status = "okay";
 };
 
-/* RS485 */
+/*
 &scif1 {
 	pinctrl-0 = <&scif1_pins>;
 	pinctrl-names = "default";
 	status = "okay";
-};
+};*/
 
+/*
 &scif2 {
-        pinctrl-0 = <&scif2_pins>;
-        pinctrl-names = "default";
-        status = "okay";
-};
+	pinctrl-0 = <&scif2_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+};*/
 
-/* RS232 */
+/*
 &scif3 {
-        pinctrl-0 = <&scif3_pins>;
-        pinctrl-names = "default";
-        status = "okay";
-};
+	pinctrl-0 = <&scif3_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+};*/
 
 &hsusb {
-        dr_mode = "otg";
-        status = "okay";
+	dr_mode = "otg";
+	status = "okay";
 };
 &phyrst {
-        status = "okay";
+	status = "okay";
 };
 
 &mtu3 {
-        status = "okay";
+	status = "okay";
 };
 
 &cru {
 	status = "okay";
 };
 
+/*
 &spi0 {
-        pinctrl-0 = <&spi0_pins>;
-        pinctrl-names = "default";
-        status = "okay";
+	pinctrl-0 = <&spi0_pins>;
+	pinctrl-names = "default";
+	status = "okay";
 
-        spidev@0{
-			#address-cellss=<1>;
-			#size-cells=<1>;
-			//compatible = "spidev","rohm,dh2228fv";
-			compatible = "rohm,dh2228fv","ge,achc";
-			spi-max-frequency = <80000000>;
-			reg = <0>;
-       };
-};
+	spidev@0{
+		#address-cellss=<1>;
+		#size-cells=<1>;
+		//compatible = "spidev","rohm,dh2228fv";
+		compatible = "rohm,dh2228fv","ge,achc";
+		spi-max-frequency = <80000000>;
+		reg = <0>;
+	};
+};*/

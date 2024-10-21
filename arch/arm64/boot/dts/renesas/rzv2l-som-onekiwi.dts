@@ -56,7 +56,7 @@
 
     hdmi-out {
 		compatible = "hdmi-connector";
-		type = "d";
+		type = "a";
 
 		port {
 			hdmi_con_out: endpoint {
@@ -110,7 +110,6 @@
 	};
 };
 
-
 &ssi1 {
 	pinctrl-0 = <&ssi1_pins>;
 	pinctrl-names = "default";
@@ -138,8 +137,8 @@
 		ddc-i2c-bus = <&i2c0>;
 		dsi-lanes = <4>;
 		reg = <0x48>;
-		reset-gpios = <&pinctrl RZG2L_GPIO(42, 2) GPIO_ACTIVE_HIGH>;
-		hpd-gpios = <&pinctrl RZG2L_GPIO(2, 0) GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&pinctrl RZG2L_GPIO(27, 1) GPIO_ACTIVE_HIGH>;
+		hpd-gpios = <&pinctrl RZG2L_GPIO(25, 0) GPIO_ACTIVE_HIGH>;
 	//	interrupt-parent = <&pinctrl>;
 	//	interrupts = <RZG2L_GPIO(2, 0) IRQ_TYPE_EDGE_RISING>;
 
@@ -156,23 +155,22 @@
 		display-timings {
 			native-mode = <&timing0>;
 			timing0:timing0{
-					clock-frequency = <51200000>;
+				clock-frequency = <51200000>;
 
-					hactive = <1024>;
-					hsync-len = <20>;
-					hback-porch = <162>;
-					hfront-porch = <140>;
-					vactive = <600>;
-					vsync-len = <3>;
-					vback-porch = <20>;
-					vfront-porch = <12>;
+				hactive = <1024>;
+				hsync-len = <20>;
+				hback-porch = <162>;
+				hfront-porch = <140>;
+				vactive = <600>;
+				vsync-len = <3>;
+				vback-porch = <20>;
+				vfront-porch = <12>;
 
-					vsync-active = <0>;
-					hsync-active =<0>;
-					de-active =<0>;
-					pixelclk-active =<0>;
+				vsync-active = <0>;
+				hsync-active =<0>;
+				de-active =<0>;
+				pixelclk-active =<0>;
 			};
-
 		};
 
 		ports{
@@ -203,7 +201,7 @@
 
 	};
 
-
+	/*
 	ft5x06: ft5x06@38 {
 		compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
 		reg = <0x38>;
@@ -212,6 +210,6 @@
 		reset-gpios = <&pinctrl RZG2L_GPIO(42, 3) GPIO_ACTIVE_LOW>;
 		touchscreen-size-x=<1024>;
 		touchscreen-size-y=<600>;
-	};
+	};*/
 };
 
