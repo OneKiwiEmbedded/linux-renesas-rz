@@ -63,11 +63,12 @@
 		clock-flags = <2176>, <2176>, <2176>, <2052>, <2176>, <2048>;
 	};
 
+	/*
 	wm8978: codec@1a {
 		compatible = "wlf,wm8978";
 		#sound-dai-cells = <0>;
 		reg = <0x1a>;
-	};
+	};*/
 };
 
 /*
@@ -114,15 +115,17 @@
 	gpios = <&pinctrl RZG2L_GPIO(39, 1) GPIO_ACTIVE_HIGH>;
 };
 
+/*
 &ov5645 {
 	enable-gpios = <&pinctrl RZG2L_GPIO(2, 0) GPIO_ACTIVE_HIGH>;
 	reset-gpios = <&pinctrl RZG2L_GPIO(40, 2) GPIO_ACTIVE_LOW>;
-};
+};*/
 
+/*
 &adv7535 {
 	interrupt-parent = <&pinctrl>;
 	interrupts = <RZG2L_GPIO(2, 1) IRQ_TYPE_EDGE_FALLING>;
-};
+};*/
 
 #if (MTU3_PWM_SUPPORT || MTU3_PHASE_COUNTING_SUPPORT)
 &mtu3 {

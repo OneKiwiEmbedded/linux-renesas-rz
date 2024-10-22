@@ -50,7 +50,7 @@
 / {
 	aliases {
 		i2c3 = &i2c3;
-		ethernet0 = &eth0;
+		//ethernet0 = &eth0;
 		ethernet1 = &eth1;
 	};
 
@@ -144,6 +144,7 @@
 	/delete-node/ channel@7;
 };
 
+/*
 &eth0 {
 	pinctrl-0 = <&eth0_pins>;
 	pinctrl-names = "default";
@@ -171,7 +172,7 @@
 		interrupt-parent = <&pinctrl>;
 		interrupts = <RZG2L_GPIO(1, 0) IRQ_TYPE_LEVEL_LOW>;
 	};
-};
+};*/
 
 &eth1 {
 	pinctrl-0 = <&eth1_pins>;
