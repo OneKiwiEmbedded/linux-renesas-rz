@@ -114,7 +114,7 @@
 
 	hdmi-out {
 		compatible = "hdmi-connector";
-		ddc-i2c-bus = <&i2c1>;
+		ddc-i2c-bus = <&i2c0>;
 		type = "a";
 
 		port {
