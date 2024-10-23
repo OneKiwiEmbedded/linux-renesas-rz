@@ -48,9 +48,14 @@
 		input-enable;
 	};
 
+	i2c2_pins: i2c2 {
+		pinmux = <RZG2L_PORT_PINMUX(3,0,2)>, /* SDA */
+				 <RZG2L_PORT_PINMUX(3,1,2)>; /* SCL */
+	};
+
 	i2c3_pins: i2c3 {
 		pinmux = <RZG2L_PORT_PINMUX(18, 0, 3)>, /* SDA */
-			 <RZG2L_PORT_PINMUX(18, 1, 3)>; /* SCL */
+				 <RZG2L_PORT_PINMUX(18, 1, 3)>; /* SCL */
 	};
 
 #if (MTU3_PWM_SUPPORT || MTU3_PHASE_COUNTING_SUPPORT)
