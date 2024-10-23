@@ -114,14 +114,15 @@
 
 	hdmi-out {
 		compatible = "hdmi-connector";
+		ddc-i2c-bus = <&i2c1>;
 		type = "a";
 
 		port {
 			hdmi_con_out: endpoint {
-				remote-endpoint = <&lt8912_out>;
+				remote-endpoint = <&dsi_hdmi_bridge_out>;
 			};
 		};
-    };
+	};
 
 	clk_ext_camera: clk_ext_camera {
 		compatible = "fixed-clock";
@@ -229,74 +230,32 @@
     pinctrl-names = "default";
     status = "okay";
 
-	/* MIPI-DSI to HDMI and LVDS adapter */
-	hdmi@48 {
-		compatible = "lontium,lt8912";
-		ddc-i2c-bus = <&i2c0>;
-		dsi-lanes = <4>;
+	/delete-node/ hdmi@3d;
+
+	dsi_hdmi_bridge: dsihdmi@48 {
+		compatible = "lontium,lt8912b";
 		reg = <0x48>;
-		reset-gpios = <&pinctrl RZG2L_GPIO(27, 1) GPIO_ACTIVE_HIGH>;
-		hpd-gpios = <&pinctrl RZG2L_GPIO(25, 0) GPIO_ACTIVE_HIGH>;
-	//	interrupt-parent = <&pinctrl>;
-	//	interrupts = <RZG2L_GPIO(2, 0) IRQ_TYPE_EDGE_RISING>;
+		reset-gpios = <&pinctrl RZG2L_GPIO(27, 1) GPIO_ACTIVE_LOW>;
 
-	/*  LVDS output or HDMI output
-		0: lvds
-		1: hdmi
-		2: hdmi and lvds
-    */
-		lvds_mode = <2>;
-		bit_color = <0> ;    // 0:24bit   1:18bit
-		hdmi_mode = <0>;     // 0: 1080P  1:720P
-		audio_mode = <2>;     // 0:NONE   1: SPDIF 2: I2S
-
-		display-timings {
-			native-mode = <&timing0>;
-			timing0:timing0{
-				clock-frequency = <51200000>;
-
-				hactive = <1024>;
-				hsync-len = <20>;
-				hback-porch = <162>;
-				hfront-porch = <140>;
-				vactive = <600>;
-				vsync-len = <3>;
-				vback-porch = <20>;
-				vfront-porch = <12>;
-
-				vsync-active = <0>;
-				hsync-active =<0>;
-				de-active =<0>;
-				pixelclk-active =<0>;
-			};
-		};
-
-		ports{
+		ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
+
 			port@0 {
 				reg = <0>;
-				lt8912_in: endpoint@0 {
+				dsi_hdmi_bridge_in: endpoint@0 {
+					data-lanes = <0 1 2 3>;
 					remote-endpoint = <&dsi0_out>;
 				};
 			};
 
 			port@1 {
 				reg = <1>;
-				lt8912_out: endpoint@1 {
+				dsi_hdmi_bridge_out: endpoint@1 {
 					remote-endpoint = <&hdmi_con_out>;
 				};
 			};
-
-			port@2 {
-				reg = <2>;
-				codec_endpoint: endpoint {
-						remote-endpoint = <&i2s2_cpu_endpoint>;
-				};
-             };
-
 		};
-
 	};
 };
 
@@ -428,22 +387,13 @@
 
 &dsi0 {
 	status = "okay";
-
-	/*
+	
 	ports {
 		port@1 {
+			reg = <1>;
 			dsi0_out: endpoint {
-				remote-endpoint = <&adv7535_in>;
-				data-lanes = <1 2 3 4>;
-			};
-		};
-	};*/
-
-	ports {
-		port@1 {
-			dsi0_out: endpoint {
-				remote-endpoint = <&lt8912_in>;
-				data-lanes = <1 2 3 4>;
+				data-lanes = <0 1 2 3>;
+				remote-endpoint = <&dsi_hdmi_bridge_in>;
 			};
 		};
 	};

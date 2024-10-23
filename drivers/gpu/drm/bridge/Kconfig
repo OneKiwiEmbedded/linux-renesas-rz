@@ -70,6 +70,20 @@ config DRM_LONTIUM_LT8912
 	help
 	  Lontium LT8912 MIPI-DSI to LVDS and HDMI/MHL bridge chip driver.
 
+config DRM_LONTIUM_LT8912B
+	tristate "Lontium LT8912B DSI/HDMI bridge"
+	depends on OF
+	select DRM_PANEL_BRIDGE
+	select DRM_KMS_HELPER
+	select REGMAP_I2C
+	help
+	  Driver for Lontium LT8912B DSI to HDMI bridge
+	  chip driver.
+	  Please say Y if you have such hardware.
+
+	  Say M here if you want to support this hardware as a module.
+	  The module will be named "lontium-lt8912b".
+
 config DRM_LVDS_CODEC
 	tristate "Transparent LVDS encoders and decoders support"
 	depends on OF

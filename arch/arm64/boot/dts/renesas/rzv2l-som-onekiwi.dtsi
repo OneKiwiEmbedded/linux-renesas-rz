@@ -17,10 +17,11 @@
 		i2c3 = &i2c3;
 	};
 
+	/*
 	sound_card {
 		compatible = "audio-graph-card";
 		dais = <&i2s2_port0>;
-	};
+	};*/
 
 	x1_clk: x1-clock {
 		compatible = "fixed-clock";
@@ -95,6 +96,7 @@
 	status = "okay";
 };
 
+/*
 &ssi1 {
 	pinctrl-0 = <&ssi1_pins>;
 	pinctrl-names = "default";
@@ -109,7 +111,7 @@
 			};
 		};
 	};
-};
+};*/
 
 &vccq_sdhi1 {
 	gpios = <&pinctrl RZG2L_GPIO(39, 1) GPIO_ACTIVE_HIGH>;
