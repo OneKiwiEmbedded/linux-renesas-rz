@@ -236,7 +236,7 @@
 		compatible = "lontium,lt8912b";
 		reg = <0x48>;
 		reset-gpios = <&pinctrl RZG2L_GPIO(27, 1) GPIO_ACTIVE_LOW>;
-		//hpd-gpios = <&pinctrl RZG2L_GPIO(25, 0) GPIO_ACTIVE_HIGH>;
+		hpd-gpios = <&pinctrl RZG2L_GPIO(25, 0) GPIO_ACTIVE_HIGH>;
 
 		ports {
 			#address-cells = <1>;
