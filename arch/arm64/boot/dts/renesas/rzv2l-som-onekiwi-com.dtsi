@@ -102,7 +102,7 @@
 
 	hdmi-out {
 		compatible = "hdmi-connector";
-		type = "d";
+		type = "a";
 
 		port {
 			hdmi_con_out: endpoint {
